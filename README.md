@@ -1,5 +1,14 @@
 # textlint-rule-ja-era-date-mismatch
 
+このtextlintルールは、文書内で西暦と和暦（元号）が正しく対応していない場合を検出します。
+西暦と和暦の間に矛盾がある場合、このルールによって指摘されます。
+
+例
+```
+誤り)2016年(平成12年)は良い年だった。
+```
+
+
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
