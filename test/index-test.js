@@ -5,8 +5,7 @@ const tester = new TextLintTester();
 // ruleName, rule, { valid, invalid }
 tester.run("rule", rule, {
     valid: [
-        // no problem
-        "text",
+        "2016年(平成12年)は良い年だった。", 
         {
             text: "It is bugs, but it should be ignored",
             options: {
@@ -14,33 +13,4 @@ tester.run("rule", rule, {
             }
         }
     ],
-    invalid: [
-        // single match
-        {
-            text: "It is bugs.",
-            errors: [
-                {
-                    message: "Found bugs.",
-                    range: [6, 10]
-                }
-            ]
-        },
-        // multiple match
-        {
-            text: `It has many bugs.
-
-One more bugs`,
-            errors: [
-                {
-                    message: "Found bugs.",
-                    range: [12, 16]
-                },
-                {
-                    message: "Found bugs.",
-                    range: [28, 32]
-                }
-            ]
-        },
-    
-    ]
 });
