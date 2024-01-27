@@ -1,6 +1,5 @@
 # textlint-rule-ja-era-date-mismatch
 
-
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
