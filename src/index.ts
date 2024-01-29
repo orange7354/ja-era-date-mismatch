@@ -29,27 +29,25 @@ const validateEraAndAdYear = (eraYearInfo: EraYearInfo): ValidationResult => {
     if (!eraDetail) return validationResult;
 
     const eraYear = Number(eraYearInfo.eraYear);
+    const adYear = Number(eraYearInfo.adYear);
     const correctAdYear = eraDetail.startYear + eraYear - 1;
-    
-    if (correctAdYear.toString() !== eraYearInfo.adYear) {
-        validationResult.isValid = false;
-        validationResult.errorMessage = '和暦と西暦の対応が間違っています。'
-            + `${eraYearInfo.eraName}${eraYearInfo.eraYear}年は${correctAdYear}年です。`;
 
+    if (correctAdYear !== adYear) {
+        validationResult.isValid = false;
+        validationResult.errorMessage = `${adYear}年 => ${correctAdYear}年 \n
+                ${eraYearInfo.eraName}${eraYearInfo.eraYear}年の西暦は${correctAdYear}年です。`;
         return validationResult;
     }
-
 
     if (eraYear > eraDetail.maxLength) {
         validationResult.isValid = false;
-        validationResult.errorMessage = `${eraYearInfo.eraName}の年数は${eraDetail.maxLength}年までです。`;
-
+        validationResult.errorMessage = `${eraYearInfo.eraName}の年数は${eraDetail.maxLength}年までです。"${eraYearInfo.eraName}${eraYearInfo.eraYear}年" は範囲外です。`;
         return validationResult;
     }
 
-
     return validationResult;
 };
+
 
 const textlintRule: TextlintRuleModule = (context) => {
     const { Syntax, RuleError, report, getSource } = context;
@@ -57,6 +55,7 @@ const textlintRule: TextlintRuleModule = (context) => {
         async [Syntax.Str](node) {
             const text = getSource(node);
 
+            //TODO fixableにしたい 
             let match;
             while ((match = PATTERN_AD_TO_ERA.exec(text))) {
                 const index = match.index;
