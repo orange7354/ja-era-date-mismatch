@@ -34,8 +34,7 @@ const validateEraAndAdYear = (eraYearInfo: EraYearInfo): ValidationResult => {
 
     if (correctAdYear !== adYear) {
         validationResult.isValid = false;
-        validationResult.errorMessage = `${adYear}年 => ${correctAdYear}年 \n
-                ${eraYearInfo.eraName}${eraYearInfo.eraYear}年の西暦は${correctAdYear}年です。`;
+        validationResult.errorMessage = `${adYear}年 => ${correctAdYear}年 ${eraYearInfo.eraName}${eraYearInfo.eraYear}年の西暦は${correctAdYear}年です。`;
         return validationResult;
     }
 
